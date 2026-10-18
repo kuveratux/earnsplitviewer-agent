@@ -21,8 +21,10 @@
 <script src="appearance.js"></script>
 </head>
 <body>
+<!-- ヘッダとタブ：スクロールしても上に残す -->
+<div class="topbar">
 <header class="bar">
-  <div class="title"><h1>EARN SPLIT VIEWER</h1><span class="role">Agent</span></div>
+  <div class="title"><img class="bar-icon" src="icons/icon-180.png" alt=""><h1>EARN SPLIT VIEWER</h1><span class="role">Agent</span></div>
   <span id="status" class="status"></span>
 </header>
 
@@ -32,6 +34,7 @@
   <button role="tab" data-tab="tx" aria-selected="false">取引履歴</button>
   <button role="tab" data-tab="settings" aria-selected="false">設定</button>
 </nav>
+</div>
 
 <div id="updateNote" class="note update" hidden>新しいバージョンがあります。<button id="reloadBtn" class="primary">更新する</button></div>
 <main>
