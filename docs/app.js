@@ -22,7 +22,18 @@ function renderReward() {
   renderRankingTab(me);
 }
 
+// ランキングでの自分の表示名（端末の中だけ。空欄なら「自分」）
+$('rankSelfName').addEventListener('change', async () => {
+  rankSelfName = $('rankSelfName').value.trim();
+  await putSetting('rankSelfName', rankSelfName);
+  refreshAll();
+});
+
 ESV.start({
+  async init() {
+    rankSelfName = (await getSetting('rankSelfName')) || '';
+    $('rankSelfName').value = rankSelfName;
+  },
   render() { if (data) { renderTx(); renderReward(); } },
   describe() { return '　取引：' + data.transfers.length + ' 件'; },
 });
