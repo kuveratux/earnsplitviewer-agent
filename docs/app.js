@@ -17,7 +17,9 @@ function renderTx() {
 
 function renderReward() {
   const split = data.transfers.find((x) => x.cls === 'split');
-  renderRewardTab(split ? [{ id: 'agent', name: (data.member && data.member.name) || 'Agent', share: split.share }] : [], false);
+  const me = split ? [{ id: 'agent', name: (data.member && data.member.name) || 'Agent', share: split.share }] : [];
+  renderRewardTab(me, false);
+  renderRankingTab(me);
 }
 
 ESV.start({
