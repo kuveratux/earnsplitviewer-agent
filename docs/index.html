@@ -38,7 +38,7 @@
   <section id="tab-ranking" class="tab" hidden>
     <div class="card whenEmpty" hidden>
       <h2>データがありません</h2>
-      <p class="muted">招待リンクを開くか、「設定」タブの「データの受け取り」で［招待コードを入れる］を押してください（ファイルから読み込むこともできます）。</p>
+      <p class="muted">招待リンクを開くか、下の［コピーした招待コードで受け取る］［招待コードを入れる］で受け取ってください。</p>
       <div class="row"><button type="button" class="primary pasteInviteBtn">コピーした招待コードで受け取る</button><button type="button" class="openCodeBtn">招待コードを入れる</button></div>
     </div>
     <div class="whenData" hidden>
@@ -66,7 +66,7 @@
   <section id="tab-tx" class="tab" hidden>
     <div class="card whenEmpty" hidden>
       <h2>データがありません</h2>
-      <p class="muted">招待リンクを開くか、「設定」タブの「データの受け取り」で［招待コードを入れる］を押してください（ファイルから読み込むこともできます）。</p>
+      <p class="muted">招待リンクを開くか、下の［コピーした招待コードで受け取る］［招待コードを入れる］で受け取ってください。</p>
       <div class="row"><button type="button" class="primary pasteInviteBtn">コピーした招待コードで受け取る</button><button type="button" class="openCodeBtn">招待コードを入れる</button></div>
     </div>
     <div class="whenData" hidden>
@@ -107,7 +107,7 @@
   <section id="tab-reward" class="tab" hidden>
     <div class="card whenEmpty" hidden>
       <h2>データがありません</h2>
-      <p class="muted">招待リンクを開くか、「設定」タブの「データの受け取り」で［招待コードを入れる］を押してください（ファイルから読み込むこともできます）。</p>
+      <p class="muted">招待リンクを開くか、下の［コピーした招待コードで受け取る］［招待コードを入れる］で受け取ってください。</p>
       <div class="row"><button type="button" class="primary pasteInviteBtn">コピーした招待コードで受け取る</button><button type="button" class="openCodeBtn">招待コードを入れる</button></div>
     </div>
     <div class="whenData" hidden>
@@ -152,7 +152,7 @@
   <section id="tab-asset" class="tab">
     <div class="card whenEmpty" hidden>
       <h2>データがありません</h2>
-      <p class="muted">招待リンクを開くか、「設定」タブの「データの受け取り」で［招待コードを入れる］を押してください（ファイルから読み込むこともできます）。</p>
+      <p class="muted">招待リンクを開くか、下の［コピーした招待コードで受け取る］［招待コードを入れる］で受け取ってください。</p>
       <div class="row"><button type="button" class="primary pasteInviteBtn">コピーした招待コードで受け取る</button><button type="button" class="openCodeBtn">招待コードを入れる</button></div>
     </div>
     <div class="whenData" hidden>
@@ -193,18 +193,22 @@
 
   <!-- 設定 -->
   <section id="tab-settings" class="tab" hidden>
-    <!-- データの受け取り（2026-10）：招待リンク・招待コードで覚えたファイルを、ログインなしで自動で受け取る -->
+    <!-- インポートデータ（2.1。以前の「データの受け取り」）：招待リンク・招待コードで覚えたファイルを、ログインなしで自動で受け取る
+         ［ファイルから読み込む］［保存した合言葉を削除］は 2.1 でなくした（EARN VIEWER に合わせる。2026-10 ユーザー決定） -->
     <div class="card">
-      <h2>データの受け取り</h2>
+      <div class="card-head"><h2>インポートデータ</h2><button id="recvCheckBtn" class="primary">今すぐ確認</button></div>
       <div id="recvInfo" class="kv kv-plain recv-info"></div>
-      <div class="row">
-        <button id="recvCheckBtn" class="primary">今すぐ確認</button>
-        <button id="inviteCodeBtn" type="button">招待コードを入れる</button>
-      </div>
-      <div class="row">
-        <label class="button">ファイルから読み込む<input class="dataFile" type="file" accept="application/json,.json" multiple hidden></label>
-        <button id="forgetPassBtn" hidden>保存した合言葉を削除</button>
-      </div>
+      <!-- 新しい招待コードに切り替えるとき（iPhone のホーム画面のアプリは、招待リンクを開いても Safari が開くため、ここで受け取る） -->
+      <details id="recvMore" class="fold recv-more">
+        <summary>その他</summary>
+        <div class="fold-body">
+          <p class="muted">新しい招待を受け取ったときに使います（iPhone でホーム画面に追加したアプリなど）。招待リンクを開いた画面の［コードをコピー］でコピーしてから押してください。</p>
+          <div class="row">
+            <button type="button" class="primary pasteInviteBtn">コピーした招待コードで受け取る</button>
+            <button id="inviteCodeBtn" type="button">招待コードを入れる</button>
+          </div>
+        </div>
+      </details>
     </div>
     <div class="card">
       <h2>アドレス一覧</h2>
@@ -289,7 +293,7 @@
   <form method="dialog">
     <h2>受け取りました</h2>
     <p>このあとは、アプリを開くたびに自動で最新のデータになります。</p>
-    <p class="muted">ホーム画面に追加して使う場合、iPhone では追加したアプリにもう一度この招待コードを入れてください（設定タブの「データの受け取り」→［招待コードを入れる］）。</p>
+    <p class="muted">ホーム画面に追加して使う場合、iPhone では追加したアプリにもう一度この招待コードを入れてください（設定タブの「インポートデータ」→「その他」→［コピーした招待コードで受け取る］）。</p>
     <p id="inviteDoneCode" class="mono invite-code"></p>
     <div class="row">
       <button id="inviteCopyBtn" type="button" class="primary">コードをコピー</button>
