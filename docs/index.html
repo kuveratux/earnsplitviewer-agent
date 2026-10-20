@@ -38,7 +38,8 @@
   <section id="tab-ranking" class="tab" hidden>
     <div class="card whenEmpty" hidden>
       <h2>データがありません</h2>
-      <p class="muted">「設定」タブの「最新データを取得」（またはファイルから読み込む）で、データを読み込んでください。</p>
+      <p class="muted">招待リンクを開くか、「設定」タブの「データの受け取り」で［招待コードを入れる］を押してください（ファイルから読み込むこともできます）。</p>
+      <div class="row"><button type="button" class="primary pasteInviteBtn">コピーした招待コードで受け取る</button><button type="button" class="openCodeBtn">招待コードを入れる</button></div>
     </div>
     <div class="whenData" hidden>
       <div id="rankNote" class="note" hidden></div>
@@ -65,7 +66,8 @@
   <section id="tab-tx" class="tab" hidden>
     <div class="card whenEmpty" hidden>
       <h2>データがありません</h2>
-      <p class="muted">「設定」タブの「最新データを取得」（またはファイルから読み込む）で、データを読み込んでください。</p>
+      <p class="muted">招待リンクを開くか、「設定」タブの「データの受け取り」で［招待コードを入れる］を押してください（ファイルから読み込むこともできます）。</p>
+      <div class="row"><button type="button" class="primary pasteInviteBtn">コピーした招待コードで受け取る</button><button type="button" class="openCodeBtn">招待コードを入れる</button></div>
     </div>
     <div class="whenData" hidden>
       <!-- 配布先の取引（起動時は開く） -->
@@ -105,7 +107,8 @@
   <section id="tab-reward" class="tab" hidden>
     <div class="card whenEmpty" hidden>
       <h2>データがありません</h2>
-      <p class="muted">「設定」タブの「最新データを取得」（またはファイルから読み込む）で、データとランク表を読み込んでください。</p>
+      <p class="muted">招待リンクを開くか、「設定」タブの「データの受け取り」で［招待コードを入れる］を押してください（ファイルから読み込むこともできます）。</p>
+      <div class="row"><button type="button" class="primary pasteInviteBtn">コピーした招待コードで受け取る</button><button type="button" class="openCodeBtn">招待コードを入れる</button></div>
     </div>
     <div class="whenData" hidden>
       <div id="rewardNote" class="note" hidden></div>
@@ -149,7 +152,8 @@
   <section id="tab-asset" class="tab">
     <div class="card whenEmpty" hidden>
       <h2>データがありません</h2>
-      <p class="muted">「設定」タブの「最新データを取得」（またはファイルから読み込む）で、データとランク表を読み込んでください。</p>
+      <p class="muted">招待リンクを開くか、「設定」タブの「データの受け取り」で［招待コードを入れる］を押してください（ファイルから読み込むこともできます）。</p>
+      <div class="row"><button type="button" class="primary pasteInviteBtn">コピーした招待コードで受け取る</button><button type="button" class="openCodeBtn">招待コードを入れる</button></div>
     </div>
     <div class="whenData" hidden>
       <div id="assetNote" class="note" hidden></div>
@@ -189,18 +193,16 @@
 
   <!-- 設定 -->
   <section id="tab-settings" class="tab" hidden>
+    <!-- データの受け取り（2026-10）：招待リンク・招待コードで覚えたファイルを、ログインなしで自動で受け取る -->
     <div class="card">
-      <h2>データ</h2>
+      <h2>データの受け取り</h2>
+      <div id="recvInfo" class="kv kv-plain recv-info"></div>
       <div class="row">
-        <button class="primary driveFetch driveOnly" hidden>最新データを取得</button>
-        <label class="button">ファイルから読み込む<input class="dataFile" type="file" accept="application/json,.json" multiple hidden></label>
+        <button id="recvCheckBtn" class="primary">今すぐ確認</button>
+        <button id="inviteCodeBtn" type="button">招待コードを入れる</button>
       </div>
-    </div>
-    <div class="card driveOnly" hidden>
-      <h2>Google ドライブ</h2>
-      <ul id="driveSlots" class="slotlist"></ul>
       <div class="row">
-        <button id="driveSignOutBtn">連携を解除</button>
+        <label class="button">ファイルから読み込む<input class="dataFile" type="file" accept="application/json,.json" multiple hidden></label>
         <button id="forgetPassBtn" hidden>保存した合言葉を削除</button>
       </div>
     </div>
@@ -259,6 +261,40 @@
       <button value="close" class="help-close" aria-label="閉じる">×</button>
     </div>
     <div id="helpBody" class="help-body"></div>
+  </form>
+</dialog>
+
+<!-- 招待リンクをブラウザで開いたときの案内（Android はインストールを先に、iPhone はホーム画面に追加の手順、アプリの中のブラウザは開き直し） -->
+<dialog id="onbDlg" class="onb-dlg">
+  <form method="dialog">
+    <h2 id="onbTitle"></h2>
+    <div id="onbBody" class="onb-body"></div>
+    <div id="onbBtns" class="onb-btns"></div>
+  </form>
+</dialog>
+
+<dialog id="codeDlg">
+  <form method="dialog">
+    <h2>招待コードを入れる</h2>
+    <p class="muted">Manager から受け取った招待コード（または招待リンク）を貼り付けてください。</p>
+    <label class="field">招待コード <input id="codeInput" autocomplete="off" spellcheck="false" autocapitalize="off"></label>
+    <div class="row">
+      <button value="ok" class="primary">受け取る</button>
+      <button value="cancel" formnovalidate>やめる</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="inviteDoneDlg">
+  <form method="dialog">
+    <h2>受け取りました</h2>
+    <p>このあとは、アプリを開くたびに自動で最新のデータになります。</p>
+    <p class="muted">ホーム画面に追加して使う場合、iPhone では追加したアプリにもう一度この招待コードを入れてください（設定タブの「データの受け取り」→［招待コードを入れる］）。</p>
+    <p id="inviteDoneCode" class="mono invite-code"></p>
+    <div class="row">
+      <button id="inviteCopyBtn" type="button" class="primary">コードをコピー</button>
+      <button value="close">閉じる</button>
+    </div>
   </form>
 </dialog>
 
