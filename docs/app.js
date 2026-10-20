@@ -5,12 +5,10 @@
 // 共通の処理は core.js、取引タブの部品は views.js
 
 function renderTx() {
-  const sym = data.token.symbol;
   renderTxTab({
     clsList: ['split', 'agent', 'deposit', 'receive'],
     amountOf: (x) => (x.cls === 'split' ? x.share : x.amount),
-    // 合計枚数と割合は表示しない
-    splitRows: (s) => [['預入枚数', fmtAmount(s.share) + ' ' + sym]],
+    mineName: (rankSelfName || '').trim() || '自分', // ランキングでの表示名（空欄なら「自分」）
   });
 }
 ['clsSel', 'dirSel'].forEach((id) => $(id).addEventListener('change', renderTx));
